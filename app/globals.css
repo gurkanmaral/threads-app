@@ -150,6 +150,9 @@
 .account-form_input {
   @apply border border-dark-4 bg-dark-3 text-light-1 !important;
 }
+.account-search_input {
+  @apply border-none outline-none border-dark-4 bg-dark-2 text-light-1 !important;
+}
 
 /* Comment Form */
 .comment-form {

@@ -1,11 +1,12 @@
 import { formatDateString } from "@/lib/utils";
 import Image from "next/image"
 import Link from "next/link"
+import DeleteThread from "../forms/DeleteThread";
 
 interface Props {
     id:string,
     currentUserId:string,
-    parrentId:string | null,
+    parentId:string | null,
     content:string,
     author:{
         name:string;
@@ -30,7 +31,7 @@ interface Props {
 const ThreadCard = ({
     id,
     currentUserId,
-    parrentId,
+    parentId,
     content,
     author,
     community,
@@ -88,14 +89,21 @@ isComment,}:Props)=>{
                                         className="cursor-pointer object-contain"
                                         />
                                 </div>
-                                {isComment && comments.length > 0 && (
+                                {!isComment && comments.length > 0 && (
                                     <Link href={`/thread/${id}`}>
-                                        <p className="mt-1 text-subtle-medium text-gray-1">{comments.length}</p>
+                                        <p className="mt-1 text-subtle-medium text-gray-1">{comments.length} comments</p>
                                     </Link>
                                 )}
                             </div>
                         </div>
                     </div>
+                    <DeleteThread
+                    threadId={JSON.stringify(id)}
+                    currentUserId={currentUserId}
+                    authorId={author.id}
+                    parentId={parentId}
+                    isComment={isComment}
+                    />
                 </div>
                 {!isComment && community && (
                     <Link href={`/communities/${community.id}`}
